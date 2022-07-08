@@ -26,6 +26,24 @@ const products_reducer = (state, action) => {
     };
   } else if (action.type === GET_PRODUCTS_ERROR) {
     return { ...state, loadingProduct: false, loadingProductError: true };
+  } else if (action.type === GET_SINGLE_PRODUCT_BEGIN) {
+    return {
+      ...state,
+      loadingSingleProduct: true,
+      loadingSingleProductError: false,
+    };
+  } else if (action.type === GET_SINGLE_PRODUCT_SUCCESS) {
+    return {
+      ...state,
+      loadingSingleProduct: false,
+      singleProduct: action.payload,
+    };
+  } else if (action.type === GET_SINGLE_PRODUCT_ERROR) {
+    return {
+      ...state,
+      loadingSingleProduct: false,
+      loadingSingleProductError: true,
+    };
   }
   return state;
   throw new Error(`No Matching "${action.type}" - action type`);
