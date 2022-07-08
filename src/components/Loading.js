@@ -1,7 +1,13 @@
 import React from 'react';
 
 const Loading = () => {
-  return <h4>loading element</h4>;
+  return (
+    <div className='seciton section-center'>
+      <div className='loading'>
+        <h2>Loading...</h2>
+      </div>
+    </div>
+  );
 };
 
 export default Loading;
