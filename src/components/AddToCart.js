@@ -9,6 +9,19 @@ import products_reducer from '../reducers/products_reducer';
 const AddToCart = ({ product }) => {
   const { id, stock, colors } = product;
   const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [amount, setAmount] = useState(1);
+
+  const increase = () => {
+    setAmount((old) => {
+      return Math.min(old + 1, stock);
+    });
+  };
+
+  const decrease = () => {
+    setAmount((old) => {
+      return Math.max(1, old - 1);
+    });
+  };
 
   return (
     <Wrapper>
@@ -30,7 +43,16 @@ const AddToCart = ({ product }) => {
             );
           })}
         </div>
-        <div className='btn-container'></div>
+      </div>
+      <div className='btn-container'>
+        <AmountButtons
+          amount={amount}
+          increase={increase}
+          decrease={decrease}
+        />
+        <Link to='/cart' className='btn'>
+          Add to Cart
+        </Link>
       </div>
     </Wrapper>
   );
