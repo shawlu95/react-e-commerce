@@ -63,6 +63,8 @@ export const FilterProvider = ({ children }) => {
     let value = e.target.value;
     if (name === 'category') {
       value = e.target.textContent;
+    } else if (name === 'color') {
+      value = e.target.dataset.color;
     }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
