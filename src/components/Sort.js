@@ -5,9 +5,11 @@ import styled from 'styled-components';
 const Sort = () => {
   const {
     filteredProducts: products,
+    sort,
     gridView,
     setGridView,
     setListView,
+    updateSort,
   } = useFilterContext();
 
   return (
@@ -32,7 +34,13 @@ const Sort = () => {
       <hr />
       <form>
         <label htmlFor='sort'>Sort By</label>
-        <select name='name' id='sort' className='sort-input'>
+        <select
+          name='name'
+          id='sort'
+          className='sort-input'
+          value={sort}
+          onChange={updateSort}
+        >
           <option value='price-lowest'>Price (lowest)</option>
           <option value='price-highest'>Price (highest)</option>
           <option value='name-a'>name (a-z)</option>
