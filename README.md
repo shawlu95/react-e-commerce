@@ -2,6 +2,8 @@
 
 #### Older React Version
 
+Old version is requried to auto-refresh.
+
 ```
 "react": "^16.13.1",
 "react-dom": "^16.13.1",
@@ -9,6 +11,8 @@
 ```
 
 #### Current React Version
+
+Current version is required for auth0 to work correctly (especially with social-network login).
 
 ```
 "react": "^17.0.1",
