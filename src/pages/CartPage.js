@@ -9,7 +9,7 @@ const CartPage = () => {
   if (cart.length < 1) {
     return (
       <Wrapper className='page-100'>
-        <div className='emoty'>
+        <div className='empty'>
           <h2>Your cart is empty</h2>
           <Link to='/products' className='btn'>
             Continue Shopping
