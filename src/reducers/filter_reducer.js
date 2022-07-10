@@ -50,7 +50,46 @@ const filter_reducer = (state, action) => {
     const { name, value } = action.payload;
     return { ...state, filters: { ...state.filters, [name]: value } };
   } else if (action.type === FILTER_PRODUCTS) {
-    return { ...state };
+    const { allProducts } = state;
+    const { text, category, company, color, price, shipping } = state.filters;
+    let filteredProducts = [...allProducts];
+
+    if (text) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.name.toLowerCase().startsWith(text)
+      );
+    }
+
+    if (category !== 'all') {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.category === category
+      );
+    }
+
+    if (company !== 'all') {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.company === company
+      );
+    }
+
+    if (color !== 'all') {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.colors.includes(color)
+      );
+    }
+
+    // price filter is always applied
+    filteredProducts = filteredProducts.filter(
+      (product) => product.price <= price
+    );
+
+    if (shipping) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.shipping === true
+      );
+    }
+
+    return { ...state, filteredProducts };
   } else if (action.type === CLEAR_FILTERS) {
     return {
       ...state,
