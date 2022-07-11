@@ -1,12 +1,12 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const stripeController = async (req, res) => {
-  const { purchase, total_amount, shipping_fee } = req.body;
+  const { cart, totalAmount, shippingFee } = req.body;
 
   // in practice, don't use order amount from front end
   // must verify with backend logic
   const calculateOrderAmount = () => {
-    return total_amount + shipping_fee;
+    return totalAmount + shippingFee;
   };
 
   const paymentIntent = await stripe.paymentIntents.create({

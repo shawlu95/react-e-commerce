@@ -48,7 +48,14 @@ const CheckoutForm = () => {
   const elements = useElements();
 
   useEffect(() => {
-    const createPaymentIntent = async () => {};
+    const createPaymentIntent = async () => {
+      const { data } = await axios.post('/api/stripe', {
+        cart,
+        shippingFee,
+        totalAmount,
+      });
+      setClientSecret(data.clientSecret);
+    };
     createPaymentIntent();
   }, []);
 
