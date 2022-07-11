@@ -8,7 +8,11 @@ const stripeController = require('./controllers/stripeController');
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-app.post('/stripe', stripeController);
+app.get('/api/ping', (req, res) => {
+  return res.send('pong');
+});
+
+app.post('/api/stripe', stripeController);
 
 const start = async () => {
   try {
