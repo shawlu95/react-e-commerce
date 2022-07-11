@@ -11,7 +11,7 @@ import axios from 'axios';
 import { useCartContext } from '../context/cart_context';
 import { useUserContext } from '../context/user_context';
 import { formatPrice } from '../utils/helpers';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 require('dotenv').config();
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
@@ -37,7 +37,7 @@ const cardStyle = {
 const CheckoutForm = () => {
   const { cart, totalAmount, shippingFee, clearCart } = useCartContext();
   const { myUser } = useUserContext();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
@@ -81,7 +81,7 @@ const CheckoutForm = () => {
       setSucceeded(true);
       setTimeout(() => {
         clearCart();
-        history.push('/');
+        navigate('/');
       }, 3000);
     }
   };
