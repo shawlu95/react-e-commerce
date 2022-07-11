@@ -1,3 +1,4 @@
+import AuthWrapper from './AuthWrapper';
 import Home from './HomePage';
 import Products from './ProductsPage';
 import SingleProduct from './SingleProductPage';
@@ -8,6 +9,7 @@ import Checkout from './CheckoutPage';
 import PrivateRoute from './PrivateRoute';
 
 export {
+  AuthWrapper,
   Home,
   Products,
   SingleProduct,
