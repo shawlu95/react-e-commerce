@@ -53,7 +53,7 @@ export const FilterProvider = ({ children }) => {
   };
 
   const updateSort = (e) => {
-    const name = e.target.name; // not needed
+    // const name = e.target.name; // sanity check
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
   };
