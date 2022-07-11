@@ -12,9 +12,78 @@ import { useCartContext } from '../context/cart_context';
 import { useUserContext } from '../context/user_context';
 import { formatPrice } from '../utils/helpers';
 import { useHistory } from 'react-router-dom';
+require('dotenv').config();
+
+const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+
+const cardStyle = {
+  style: {
+    base: {
+      color: '#32325d',
+      fontFamily: 'Arial, sans-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '16px',
+      '::placeholder': {
+        color: '#32325d',
+      },
+    },
+    invalid: {
+      color: '#fa755a',
+      iconColor: '#fa755a',
+    },
+  },
+};
 
 const CheckoutForm = () => {
-  return <div></div>;
+  const { cart, totalAmount, shippingFee, clearCart } = useCartContext();
+  const { myUser } = useUserContext();
+  const history = useHistory();
+
+  const [succeeded, setSucceeded] = useState(false);
+  const [error, setError] = useState(null);
+  const [processing, setProcessing] = useState('');
+  const [disabled, setDisabled] = useState(false);
+  const [clientSecret, setClientSecret] = useState('');
+  const stripe = useStripe();
+  const elements = useElements();
+
+  useEffect(() => {
+    const createPaymentIntent = async () => {};
+    createPaymentIntent();
+  }, []);
+
+  const handleChnage = async (event) => {};
+
+  const handleSubmit = async (event) => {};
+
+  return (
+    <div>
+      <form id='payment-form' onSubmit={handleSubmit}>
+        <CardElement
+          id='card-element'
+          options={cardStyle}
+          onChange={handleChnage}
+        />
+        <button disabled={processing || disabled || succeeded} id='submit'>
+          <span id='button-text'>
+            {processing ? <div className='spinner' id='spinner'></div> : 'Pay'}
+          </span>
+        </button>
+        {error && (
+          <div className='card-error' role='alert'>
+            {error}
+          </div>
+        )}
+        <p className={succeeded ? 'result-message' : 'result-message hidden'}>
+          Payment Succeeded. See result in your
+          <a href={`https://dashboard.stripe.com/test/payments`}>
+            Stripe dasboard.
+          </a>
+          Refresh the page to pay again
+        </p>
+      </form>
+    </div>
+  );
 };
 
 const StripeCheckout = () => {
@@ -29,7 +98,9 @@ const StripeCheckout = () => {
 
   return (
     <Wrapper>
-      <CheckoutForm />
+      <Elements stripe={promise}>
+        <CheckoutForm />
+      </Elements>
     </Wrapper>
   );
 };
